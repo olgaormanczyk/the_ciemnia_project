@@ -19,8 +19,6 @@ class Chem:
     def __init__(self
         self.name
 
-
-
 def print_hi(name):
     return f'Hi, {name}'
 
