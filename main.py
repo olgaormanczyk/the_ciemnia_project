@@ -5,6 +5,22 @@ from typing import Any
 import pyaudio
 
 
+class Film:
+    def __init__(self, name: str, format: int, bw_color: bool, iso: int, grain: str, info: str):
+        self.name: str = name
+        self.format: int = format
+        self.bw_color: bool = bw_color
+        slef.process:str = process
+        self.iso: int = iso
+        self.grain: str = grain
+        self.info: str = info
+
+class Chem:
+    def __init__(self
+        self.name
+
+
+
 def print_hi(name):
     return f'Hi, {name}'
 
@@ -32,29 +48,31 @@ def load_config(file_name: str):
         print('file read successfully')
     return data
 
+def play_alert_sound():
+    t = Thread(target=generate_audio)
+    t.start()
 
+
+def generate_audio():
+    with wave.open('alert.wav', "rb") as f:
+        p = pyaudio.PyAudio()
+        stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
+                        channels=f.getnchannels(),
+                        rate=f.getframerate(),
+                        output=True)
+        # define stream chunk
+        chunk = 1024
+        data = f.readframes(chunk)
+        # play audio stream
+        while data:
+            stream.write(data)
+            data = f.readframes(chunk)
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
 def play_alert_sound():
     with wave.open('alert.wav', "rb") as f:
         generate_audio(f)
-
-
-def generate_audio(f):
-    p = pyaudio.PyAudio()
-    stream = p.open(format=p.get_format_from_width(f.getsampwidth()),
-                    channels=f.getnchannels(),
-                    rate=f.getframerate(),
-                    output=True)
-    # define stream chunk
-    chunk = 1024
-    data = f.readframes(chunk)
-    # play audio stream
-    while data:
-        stream.write(data)
-        data = f.readframes(chunk)
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-
 
 if __name__ == '__main__':
     play_alert_sound()
